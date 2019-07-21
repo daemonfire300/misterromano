@@ -1,0 +1,51 @@
+openapi: 3.0.0
+info:
+  title: Roman Number One-Way-Api
+  description: Convert roman numbers up to 4999 to arabic numbers
+  version: 0.0.1
+servers:
+  - url: http://localhost:8080/roman
+    description: Lorem ipsum
+paths:
+  /roman/{number}:
+    get:
+      summary: Convert a number
+      description: Lorem ipsum
+      parameters:
+        - name: number
+          in: path
+          required: true
+          description: Roman number
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Converted number
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  number:
+                    type: integer
+    /arabic/{number}:
+      get:
+        summary: Convert a number
+        description: Lorem ipsum
+        parameters:
+          - name: number
+            in: path
+            required: true
+            description: Roman number
+            schema:
+              type: string
+        responses:
+          '200':
+            description: Converted number
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    number:
+                      type: integer
