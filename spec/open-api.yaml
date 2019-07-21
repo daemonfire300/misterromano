@@ -7,15 +7,15 @@ servers:
   - url: http://localhost:8080/roman
     description: Lorem ipsum
 paths:
-  /roman/{number}:
+  /convert/{number}:
     get:
-      summary: Convert a number
+      summary: Convert a number roman or arabic
       description: Lorem ipsum
       parameters:
         - name: number
           in: path
           required: true
-          description: Roman number
+          description: Roman or arabic number
           schema:
             type: string
       responses:
@@ -26,26 +26,7 @@ paths:
               schema:
                 type: object
                 properties:
-                  number:
+                  arabic:
                     type: integer
-    /arabic/{number}:
-      get:
-        summary: Convert a number
-        description: Lorem ipsum
-        parameters:
-          - name: number
-            in: path
-            required: true
-            description: Roman number
-            schema:
-              type: string
-        responses:
-          '200':
-            description: Converted number
-            content:
-              application/json:
-                schema:
-                  type: object
-                  properties:
-                    number:
-                      type: integer
+                  roman:
+                    type: integer

@@ -9,6 +9,6 @@ import (
 func NewApi() *mux.Router {
 	router := mux.NewRouter()
 	handler := NumberHandler{}
-	router.Path(fmt.Sprintf("/roman/{%s}", URL_NUMBER_KEY)).HandlerFunc(handler.Convert)
+	router.Path(fmt.Sprintf("/convert/{%s}", URL_NUMBER_KEY)).HandlerFunc(handler.Convert)
 	return router
 }

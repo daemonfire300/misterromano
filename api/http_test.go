@@ -22,7 +22,7 @@ func TestNumberHandler_ConvertToArabic(t *testing.T) {
 	srv := NewApi()
 	for input, expected := range dataRoman {
 		t.Run(fmt.Sprintf("Roman Number %s is correctly converted to %d", input, expected), func(t *testing.T) {
-			rq := httptest.NewRequest("GET", "http://example.org/roman/"+input, nil)
+			rq := httptest.NewRequest("GET", "http://example.org/convert/"+input, nil)
 			rspRecorder := httptest.NewRecorder()
 			srv.ServeHTTP(rspRecorder, rq)
 			resp := rspRecorder.Result() // (JF) usually as a real client you would call defer resp.Body.Close() in order to avoid open connections
@@ -51,7 +51,7 @@ func TestNumberHandler_ConvertToRoman(t *testing.T) {
 	srv := NewApi()
 	for expected, input := range dataRoman {
 		t.Run(fmt.Sprintf("Arabic Number %d is correctly converted to %s", input, expected), func(t *testing.T) {
-			rq := httptest.NewRequest("GET", fmt.Sprintf("http://example.org/roman/%d", input), nil)
+			rq := httptest.NewRequest("GET", fmt.Sprintf("http://example.org/convert/%d", input), nil)
 			rspRecorder := httptest.NewRecorder()
 			srv.ServeHTTP(rspRecorder, rq)
 			resp := rspRecorder.Result() // (JF) usually as a real client you would call defer resp.Body.Close() in order to avoid open connections
