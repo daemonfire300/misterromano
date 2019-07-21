@@ -8,6 +8,12 @@ A sample project utilizing:
 * Gorilla Mux for URL parameters
 * A roman numbers conversion library that looks good enough based on its unittests
 
+
+# Usage
+
+`go mod vendor` if a local vendor is needed, i.e. IDE autocompletion still relies on a local vendor folder for certain IDEs, or just use docker to build an artifact `docker build . -t romano1`
+and run with `docker run --detach -it --rm -p 8080:8080 --name romano romano1`.
+
 # Open API
 
 The project contains a very thinly documented open-api spec. Might be missing certain things.
