@@ -18,6 +18,17 @@ var dataRoman = map[string]int{
 	"X":         10,
 }
 
+var validInvalidRomans = map[string]bool{
+	"MCMLXXXIV": true,
+	"I":         true,
+	"V":         true,
+	"IV":        true,
+	"VI":        true,
+	"X":         true,
+	"Ü":         false,
+	"R":         false,
+}
+
 func TestNumberHandler_ConvertToArabic(t *testing.T) {
 	srv := NewApi()
 	for input, expected := range dataRoman {
@@ -45,6 +56,16 @@ func TestNumberHandler_ConvertToArabic(t *testing.T) {
 		})
 	}
 
+}
+
+func TestInvalidRoman(t *testing.T) {
+	for input, expected := range validInvalidRomans {
+		t.Run(fmt.Sprintf("%s contains invalid characters --> %v", input, expected), func(t *testing.T) {
+			if validRoman(input) != expected {
+				t.Fatalf("expected result <%v> but got <%v>", expected, validRoman(input))
+			}
+		})
+	}
 }
 
 func TestNumberHandler_ConvertToRoman(t *testing.T) {
