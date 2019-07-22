@@ -4,8 +4,8 @@ import (
 	"encoding/json"
 	"log"
 	"net/http"
+	"regexp"
 	"strconv"
-	"strings"
 
 	romanNumbers "github.com/chonla/roman-number-go"
 	"github.com/gorilla/mux"
@@ -25,8 +25,6 @@ var errorMap = map[int]string{
 	100002: "Invalid input",
 }
 
-var validRomans = "MDCLXVI"
-
 type ApiError struct {
 	Code    int    `json:"code"`
 	Message string `json:"message"`
@@ -42,7 +40,8 @@ type NumberHandler struct {
 }
 
 func validRoman(in string) bool {
-	return strings.ContainsAny(in, validRomans)
+	re := regexp.MustCompile("^[MDCLXVI]+$")
+	return re.MatchString(in)
 }
 
 func writeErr(rw http.ResponseWriter, errCode int) {

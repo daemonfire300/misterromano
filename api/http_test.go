@@ -58,6 +58,26 @@ func TestNumberHandler_ConvertToArabic(t *testing.T) {
 
 }
 
+func TestNumberHandler_InvalidRoman(t *testing.T) {
+	srv := NewApi()
+	rq := httptest.NewRequest("GET", "http://example.org/convert/UXZU", nil)
+	rspRecorder := httptest.NewRecorder()
+	srv.ServeHTTP(rspRecorder, rq)
+	resp := rspRecorder.Result()
+	content, err := ioutil.ReadAll(resp.Body)
+	if err != nil {
+		t.Fatalf("error during test: %s", err)
+	}
+	if resp.StatusCode != http.StatusInternalServerError {
+		t.Fatalf("expected http resonse code <%d> but got <%d>", http.StatusInternalServerError, resp.StatusCode)
+	}
+	apiResp := ApiError{}
+	err = json.Unmarshal(content, &apiResp)
+	if err != nil {
+		t.Fatalf("error during test: %s", err)
+	}
+}
+
 func TestInvalidRoman(t *testing.T) {
 	for input, expected := range validInvalidRomans {
 		t.Run(fmt.Sprintf("%s contains invalid characters --> %v", input, expected), func(t *testing.T) {
